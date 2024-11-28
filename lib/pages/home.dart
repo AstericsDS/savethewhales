@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../template/custom_Appbar.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -7,7 +8,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: theAppBar(),
+      appBar: CustomAppbar(child: Container(color: Colors.blue,),titled: 'Save The Whales', height: 150),
       body: Column(
         children: [
           Container(
@@ -26,7 +27,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
-          searchField(),
+          SearchField(),
           SizedBox(
             height: 40,
           ),
@@ -49,7 +50,6 @@ class Homepage extends StatelessWidget {
               const Whales(name: 'joko', image: 'assets/svgs/whale-4.svg'),
             ],
           )
-          // mainMenu(boxSize),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(items: [
@@ -58,164 +58,18 @@ class Homepage extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(Icons.request_quote_rounded), label: 'Bill'),
       ]),
     );
-  }
+  } 
+}
 
-  Column mainMenu(double boxSize) {
-    return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: boxSize,
-                  height: boxSize,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/svgs/whale-1.svg',
-                        width: 75,
-                        height: 75,
-                      ),
-                      Text(
-                        'Option 1',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: boxSize,
-                  height: boxSize,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/svgs/whale-2.svg',
-                        width: 75,
-                        height: 75,
-                      ),
-                      Text(
-                        'Option 2',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: boxSize,
-                  height: boxSize,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/svgs/whale-3.svg',
-                        width: 75,
-                        height: 75,
-                      ),
-                      Text(
-                        'Option 3',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: boxSize,
-                  height: boxSize,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/svgs/whale-4.svg',
-                        width: 75,
-                        height: 75,
-                      ),
-                      Text(
-                        'Option 4',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )
-          ],
-        );
-  }
+class Header extends AppBar{
+  Header({super.key, required this.titled});
 
-  Container searchField() {
-    return Container(
-      margin: EdgeInsets.only(top: 40, left: 20, right: 20),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 40,
-              spreadRadius: 0.0),
-        ],
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-            filled: true,
-            hintText: 'Search anything',
-            hintStyle: TextStyle(
-              color: Colors.black87,
-            ),
-            fillColor: Colors.blue[100],
-            contentPadding: EdgeInsets.all(10),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SvgPicture.asset('assets/svgs/search.svg'),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            )),
-      ),
-    );
-  }
+  final String titled;
 
-  AppBar theAppBar() {
+  AppBar build(BuildContext context){
     return AppBar(
       title: Text(
-        'Save the Whales',
+        titled,
         style: TextStyle(
           color: Colors.white,
           fontSize: 20,
@@ -259,7 +113,7 @@ class Homepage extends StatelessWidget {
 
 class Whales extends StatelessWidget{
   const Whales ({
-    super.key,
+    // super.key,
     required this.name,
     required this.image
     });
@@ -300,5 +154,44 @@ class Whales extends StatelessWidget{
               ),
             ],
         );
+  }
+}
+
+class SearchField extends Container{
+  SearchField({
+    super.key
+  });
+
+  @override
+  Container build(BuildContext context){
+    return Container(
+      margin: EdgeInsets.only(top: 40, left: 20, right: 20),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 40,
+              spreadRadius: 0.0),
+        ],
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+            filled: true,
+            hintText: 'Search anything',
+            hintStyle: TextStyle(
+              color: Colors.black87,
+            ),
+            fillColor: Colors.blue[100],
+            contentPadding: EdgeInsets.all(10),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SvgPicture.asset('assets/svgs/search.svg'),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            )),
+      ),
+    );
   }
 }

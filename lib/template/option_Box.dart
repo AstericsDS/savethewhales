@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Mainmenu extends StatelessWidget{
-  const Mainmenu ({
+class OptionBox extends StatelessWidget{
+  const OptionBox ({
     super.key,
     required this.name,
     required this.ukuran
