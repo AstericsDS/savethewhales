@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+class homepage extends StatelessWidget {
+  const homepage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,18 @@ class Homepage extends StatelessWidget {
       appBar: theAppBar(),
       body: Column(
         children: [
+          Container(
+            height: 180,
+            margin: EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(7),
+              border: Border.all(
+                color: Colors.black,
+                width: 2,
+              ),
+            ),
+          ),
           searchField(),
           SizedBox(
             height: 40,
@@ -19,6 +31,11 @@ class Homepage extends StatelessWidget {
           mainMenu(boxSize),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.map_rounded), label: 'Map'),
+        BottomNavigationBarItem(icon: Icon(Icons.request_quote_rounded), label: 'Bill'),
+      ]),
     );
   }
 
