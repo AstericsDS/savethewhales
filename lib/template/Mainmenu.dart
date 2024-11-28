@@ -27,7 +27,7 @@ class Mainmenu extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      'assets/svgs/whale-1.svg',
+                      'assets/svgs/img-box.svg',
                       width: 75,
                       height: 75,
                     ),

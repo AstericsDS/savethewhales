@@ -6,8 +6,6 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxSize = screenWidth * 0.3;
     return Scaffold(
       appBar: theAppBar(),
       body: Column(
@@ -34,20 +32,24 @@ class Homepage extends StatelessWidget {
           ),
           
           // INI BUAT CLASS BARU
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     const Mainmenu(name: 'udin', ukuran: 100),
-          //     const Mainmenu(name: 'makmur', ukuran: 100),
-          //   ]
-          // ),Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     const Mainmenu(name: 'supratman', ukuran: 100),
-          //     const Mainmenu(name: 'joko', ukuran: 100),
-          //   ],
-          // )
-          mainMenu(boxSize),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Whales(name: 'udin', image: 'assets/svgs/whale-1.svg'),
+              const Whales(name: 'makmur', image: 'assets/svgs/whale-2.svg'),
+            ]
+          ),
+          SizedBox(
+                height: 20,
+              ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Whales(name: 'supratman', image: 'assets/svgs/whale-3.svg'),
+              const Whales(name: 'joko', image: 'assets/svgs/whale-4.svg'),
+            ],
+          )
+          // mainMenu(boxSize),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(items: [
@@ -255,23 +257,25 @@ class Homepage extends StatelessWidget {
   }
 }
 
-class Mainmenu extends StatelessWidget{
-  const Mainmenu ({
+class Whales extends StatelessWidget{
+  const Whales ({
     super.key,
     required this.name,
-    required this.ukuran
+    required this.image
     });
 
     final String name;
-    final double ukuran;
+    final String image;
   
   @override
   Widget build(BuildContext context){
+    double screenWidth = MediaQuery.of(context).size.width;
+    double boxSize = screenWidth * 0.3;
     return Column(
       children: [
               Container(
-                width: ukuran,
-                height: ukuran,
+                width: boxSize,
+                height: boxSize,
                 decoration: BoxDecoration(
                   color: Colors.indigo[300],
                   borderRadius: BorderRadius.circular(10),
@@ -281,12 +285,12 @@ class Mainmenu extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      'assets/svgs/whale-1.svg',
+                      image,
                       width: 75,
                       height: 75,
                     ),
                     Text(
-                      'Option 1',
+                      name,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
