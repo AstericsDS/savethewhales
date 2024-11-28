@@ -13,7 +13,11 @@ class Homepage extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            child: Text('map coming soon',
+            textAlign: TextAlign.center,
+            ),
             height: 180,
+            width: double.maxFinite,
             margin: EdgeInsets.all(18),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -28,6 +32,21 @@ class Homepage extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
+          
+          // INI BUAT CLASS BARU
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     const Mainmenu(name: 'udin', ukuran: 100),
+          //     const Mainmenu(name: 'makmur', ukuran: 100),
+          //   ]
+          // ),Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     const Mainmenu(name: 'supratman', ukuran: 100),
+          //     const Mainmenu(name: 'joko', ukuran: 100),
+          //   ],
+          // )
           mainMenu(boxSize),
         ],
       ),
@@ -233,5 +252,49 @@ class Homepage extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class Mainmenu extends StatelessWidget{
+  const Mainmenu ({
+    super.key,
+    required this.name,
+    required this.ukuran
+    });
+
+    final String name;
+    final double ukuran;
+  
+  @override
+  Widget build(BuildContext context){
+    return Column(
+      children: [
+              Container(
+                width: ukuran,
+                height: ukuran,
+                decoration: BoxDecoration(
+                  color: Colors.indigo[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/svgs/whale-1.svg',
+                      width: 75,
+                      height: 75,
+                    ),
+                    Text(
+                      'Option 1',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+        );
   }
 }
