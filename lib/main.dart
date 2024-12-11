@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:savethewhales/pages/home.dart';
-import 'package:savethewhales/pages/bill.dart';
+
 void main() {
   runApp(MyApp());
 }
