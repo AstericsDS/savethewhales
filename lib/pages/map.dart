@@ -1,62 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_map/flutter_map.dart';
+// import 'package:flutter_svg/svg.dart';
+import 'package:latlong2/latlong.dart';
 
-class MapPage extends StatelessWidget {
+class MapPage extends StatefulWidget {
   const MapPage({super.key});
+
+  @override
+  State<MapPage> createState() => _Mapstate();
+}
+
+class _Mapstate extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            searchField(),
-            SizedBox(
-              height: 40,
-            ),
-            mainMenu(),
+      body: mainMenu()
+    );
+  }
+
+  Widget mainMenu() {
+    return FlutterMap(
+      options: const MapOptions(
+        initialCenter: LatLng(6.003,109.550),
+        initialZoom: 4,
+        interactionOptions: 
+          InteractionOptions(flags: ~InteractiveFlag.doubleTapDragZoom),
+      ),
+      children: [
+        openStreetMapTileLayer,
+        const MarkerLayer(
+          markers: [
+            Marker(
+              point: LatLng(6.003,109.550),
+              child: Icon(Icons.location_pin,semanticLabel: 'penangkaran 1',)
+              
+              )
           ],
-        ),
-      ),
+          )
+      ],
     );
   }
-
-  Container mainMenu() {
-    return Container(
-      child: Text('This is a map page'),
-    );
-  }
-
-  Container searchField() {
-    return Container(
-      margin: EdgeInsets.only(top: 40, left: 20, right: 20),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 40,
-              spreadRadius: 0.0),
-        ],
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-            filled: true,
-            hintText: 'Search anything',
-            hintStyle: TextStyle(
-              color: Colors.black87,
-            ),
-            fillColor: Colors.blue[100],
-            contentPadding: EdgeInsets.all(10),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SvgPicture.asset('assets/svgs/search.svg'),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            )),
-      ),
-    );
-  }
-
 }
+
+TileLayer get openStreetMapTileLayer => TileLayer(
+  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+);

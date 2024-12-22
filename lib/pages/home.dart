@@ -12,9 +12,9 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
-  @override
+  
   final List<Widget> _screens = [
-    HomepageContent(),
+    const HomepageContent(),
     const MapPage(),
     const BillPage(),
   ];
@@ -24,6 +24,8 @@ class _HomepageState extends State<Homepage> {
       _currentIndex = index;
     });
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: theAppBar(),
@@ -31,7 +33,7 @@ class _HomepageState extends State<Homepage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        items: [
+        items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.map_rounded), label: 'Map'),
         BottomNavigationBarItem(
@@ -42,7 +44,7 @@ class _HomepageState extends State<Homepage> {
 
   AppBar theAppBar() {
     return AppBar(
-      title: Text(
+      title: const Text(
         'Save the Whales',
         style: TextStyle(
           color: Colors.white,
@@ -54,17 +56,17 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.blue[300],
       actions: [
         Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           alignment: Alignment.center,
           width: 37,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: SvgPicture.asset(
             'assets/svgs/three-dots.svg',
             height: 20,
             width: 20,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ],
@@ -73,6 +75,8 @@ class _HomepageState extends State<Homepage> {
 }
 
 class HomepageContent extends StatelessWidget {
+  const HomepageContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
