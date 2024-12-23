@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:savethewhales/pages/home.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -16,7 +15,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Poppins'),
-      home: Homepage(),
+      home: const Homepage(),
     );
   }
 }
