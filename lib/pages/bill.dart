@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:savethewhales/services/database_service.dart';
 
 const List<String> list = <String>['Visa', 'Credit', 'QRIS'];
 
-class BillPage extends StatelessWidget {
+class BillPage extends StatefulWidget {
   const BillPage({super.key});
 
+  @override
+  State<BillPage> createState() => _BillPageState();
+}
+
+class _BillPageState extends State<BillPage> {
+  final DatabaseService _databaseService = DatabaseService.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +127,8 @@ class _AllState extends State<All> {
             },
             controlAffinity: ListTileControlAffinity.leading,
           ),
-        )
+        ),
+        
       ],
     );
   }
