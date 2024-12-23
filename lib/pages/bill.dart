@@ -1,9 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:savethewhales/services/database_service.dart';
+
+import 'table.dart';
 
 const List<String> list = <String>['Visa', 'Credit', 'QRIS'];
 typedef MenuEntry = DropdownMenuEntry<String>;
@@ -153,12 +153,31 @@ class _BillPageState extends State<BillPage> {
           Center(
             child: FilledButton(
               onPressed: (){
-                if(_billsFormKey.currentState!.validate()){
+                if(_billsFormKey.currentState!.validate() || isChecked){
                   _billsFormKey.currentState!.save();
+
+                  _databaseService.addBill(name!, phone!, email!, payment!);
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Please fill all fields and agree to the terms.'
+                      )
+                    ),
+                  );
                 }
               },
               child: const Text('Donate Now !!'),
             ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BillListPage()),
+              );
+            },
+            child: Text('Show Bills'),
           ),
         ],
       )

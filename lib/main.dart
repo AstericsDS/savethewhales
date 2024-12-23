@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:savethewhales/pages/home.dart';
-void main() {
-  runApp(MyApp());
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+Future main() async {
+
+// Initialize FFI
+sqfliteFfiInit();
+
+
+ databaseFactory = databaseFactoryFfi;
+ runApp(MyApp());
 }
+// void main() {
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatefulWidget {
   @override
