@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:savethewhales/pages/table.dart';
 import 'package:savethewhales/services/database_service.dart';
 
 const List<String> list = <String>['Visa', 'Credit', 'QRIS'];
@@ -13,6 +14,15 @@ class BillPage extends StatefulWidget {
 
 class _BillPageState extends State<BillPage> {
   final DatabaseService _databaseService = DatabaseService.instance;
+  String? name = null;
+  String? phone = null;
+  String? email = null;
+  String? payment = null;
+  static final List<MenuEntry> menuEntries = UnmodifiableListView<MenuEntry>(
+    list.map<MenuEntry>((String name) => MenuEntry(value: name, label: name)),
+  );
+  String dropdownValue = list.first;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +37,7 @@ class _BillPageState extends State<BillPage> {
   }
 
   Column mainMenu() {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
@@ -35,15 +45,17 @@ class _BillPageState extends State<BillPage> {
           child: Text(
             'Donation',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold 
-            ),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
+            onChanged: (value) {
+              setState(() {
+                name = value;
+              });
+            },
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Enter your name',
@@ -53,6 +65,11 @@ class _BillPageState extends State<BillPage> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
+            onChanged: (value) {
+              setState(() {
+                phone = value;
+              });
+            },
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Enter your phone',
@@ -62,6 +79,9 @@ class _BillPageState extends State<BillPage> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
+            onChanged: (value) {
+              email = value;
+            },
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Enter your email',
@@ -69,9 +89,88 @@ class _BillPageState extends State<BillPage> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: All()
-        )
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: Column(
+              children: <Widget>[
+                DropdownMenu<String>(
+                  width: MediaQuery.of(context).size.width,
+                  initialSelection: list.first,
+                  label: Text('Choose your payment method'),
+                  onSelected: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      dropdownValue = value!;
+                      payment = value;
+                    });
+                  },
+                  dropdownMenuEntries: menuEntries,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: CheckboxListTile(
+                    title: const Text(
+                      'By checking the box, you agree to Save The Whales privacy policy and user agreement',
+                      textScaler: TextScaler.linear(0.7),
+                    ),
+                    activeColor: Colors.blueAccent,
+                    hoverColor: Colors.blue,
+                    checkColor: Colors.white,
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    if (name == null ||
+                        phone == null ||
+                        email == null ||
+                        payment == null ||
+                        !isChecked) {
+                      // Show Snackbar if any field is missing or checkbox not checked
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(
+                                'Please fill all fields and agree to the terms.')),
+                      );
+                    } else {
+                      // Proceed to add bill
+                      _databaseService.addBill(name!, phone!, email!, payment!);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Bill created!')),
+                      );
+
+                      // Reset the form fields after successful submission
+                      setState(() {
+                        name = null;
+                        phone = null;
+                        email = null;
+                        payment = null;
+                        isChecked = false;
+                        dropdownValue = list.first; // Reset dropdown selection
+                      });
+                    }
+                  },
+                  child: const Text(
+                    "Donate",
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BillListPage()),
+                    );
+                  },
+                  child: Text('Show Bills'),
+                ),
+              ],
+            ))
       ],
     );
   }
@@ -115,7 +214,7 @@ class _AllState extends State<All> {
             title: const Text(
               'By checking the box, you agree to Save The Whales privacy policy and user agreement',
               textScaler: TextScaler.linear(0.7),
-              ),
+            ),
             activeColor: Colors.blueAccent,
             hoverColor: Colors.blue,
             checkColor: Colors.white,
@@ -128,7 +227,9 @@ class _AllState extends State<All> {
             controlAffinity: ListTileControlAffinity.leading,
           ),
         ),
-        
+        MaterialButton(
+          onPressed: () {},
+        ),
       ],
     );
   }

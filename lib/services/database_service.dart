@@ -1,4 +1,5 @@
 import 'package:path/path.dart';
+import 'package:savethewhales/models/bill.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
@@ -40,7 +41,7 @@ class DatabaseService {
     return database;
   }
 
-  Future<void> addBill(String name, String phone, String email, String payment) async {
+  void addBill(String name, String phone, String email, String payment) async {
     final db = await database;
     await db.insert(_tableName, {
       _nameColumnName: name,
@@ -49,4 +50,21 @@ class DatabaseService {
       _paymentColumnName: payment,
     });
   }
+
+  Future<List<Bill>> getBill() async {
+    final db = await database; // Assume 'database' is your initialized database
+    final data = await db
+        .query(_tableName); // _tableName should be the name of your bills table
+    List<Bill> bills = data
+        .map((e) => Bill(
+              id: e['id'] as int,
+              name: e['name'] as String,
+              phone: e['phone'] as String,
+              email: e['email'] as String, // Correct field name
+              payment: e['payment'] as String,
+            ))
+        .toList();
+    return bills;
+  }
 }
+
