@@ -1,6 +1,5 @@
 import 'package:path/path.dart';
 import 'package:savethewhales/models/bill.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
@@ -12,6 +11,7 @@ class DatabaseService {
   final String _nameColumnName = 'name';
   final String _phoneColumnName = 'phone';
   final String _emailColumnName = 'email';
+  final String _nominalColumnName = 'nominal';
   final String _paymentColumnName = 'payment';
 
   DatabaseService._constructor();
@@ -35,6 +35,7 @@ class DatabaseService {
           $_nameColumnName TEXT NOT NULL,
           $_phoneColumnName TEXT NOT NULL,
           $_emailColumnName TEXT NOT NULL,
+          $_nominalColumnName TEXT NOT NULL,
           $_paymentColumnName TEXT NOT NULL
         )''');
       },
@@ -42,12 +43,13 @@ class DatabaseService {
     return database;
   }
 
-  void addBill(String name, String phone, String email, String payment) async {
+  void addBill(String name, String phone, String email, String nominal, String payment) async {
     final db = await database;
     await db.insert(_tableName, {
       _nameColumnName: name,
       _phoneColumnName: phone,
       _emailColumnName: email,
+      _nominalColumnName: nominal,
       _paymentColumnName: payment,
     });
   }
@@ -62,6 +64,7 @@ class DatabaseService {
               name: e['name'] as String,
               phone: e['phone'] as String,
               email: e['email'] as String, // Correct field name
+              nominal: e['nominal'] as String,
               payment: e['payment'] as String,
             ))
         .toList();

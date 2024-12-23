@@ -3,6 +3,7 @@ class Bill {
   final String name;
   final String phone;
   final String email;
+  final String nominal;
   final String payment;
 
   Bill({
@@ -10,6 +11,7 @@ class Bill {
     required this.name,
     required this.phone,
     required this.email,
+    required this.nominal,
     required this.payment,
   });
 }

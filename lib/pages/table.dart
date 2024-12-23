@@ -27,6 +27,7 @@ class _BillListPageState extends State<BillListPage> {
               Bill bill = snapshot.data![index];
               return ListTile(
                 title: Text(bill.name),
+                subtitle: Text('nominal: ${bill.nominal}'),
               );
             },
           );
