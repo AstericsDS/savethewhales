@@ -73,7 +73,7 @@ class _BillPageState extends State<BillPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextFormField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -214,7 +214,7 @@ class _BillPageState extends State<BillPage> {
                 MaterialPageRoute(builder: (context) => BillListPage()),
               );
             },
-            child: Text('Show Bills'),
+            child: const Text('Show Bills'),
           ),
         ],
       )

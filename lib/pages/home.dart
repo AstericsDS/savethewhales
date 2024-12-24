@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:savethewhales/pages/about.dart';
 import 'package:savethewhales/pages/map.dart';
 import 'package:savethewhales/pages/bill.dart';
 
@@ -101,19 +102,24 @@ class HomepageContent extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          mainMenu(boxSize),
+          mainMenu(boxSize, context),
         ],
       ),
     );
   }
 
-  Column mainMenu(double boxSize) {
+  Column mainMenu(double boxSize, BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutWhales()),
+              );
+            },
+            child: Container(
               width: boxSize,
               height: boxSize,
               decoration: BoxDecoration(
@@ -129,8 +135,8 @@ class HomepageContent extends StatelessWidget {
                     width: 75,
                     height: 75,
                   ),
-                  const Text(
-                    'Option 1',
+                  Text(
+                    'Undefined',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
@@ -138,29 +144,40 @@ class HomepageContent extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutWhales()),
+              );
+            },
+            child: Container(
               width: boxSize,
               height: boxSize,
               decoration: BoxDecoration(
                 color: Colors.indigo[300],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.info, size: 70,),
-                  const Text(
-                    'Whales Info',
+                  Icon(
+                    Icons.info_outline_rounded,
+                    size: 75,
+                  ),
+                  Text(
+                    'About Whales',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ]),
         const SizedBox(
           height: 20,
         ),
