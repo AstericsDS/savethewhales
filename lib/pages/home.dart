@@ -4,6 +4,7 @@ import 'package:savethewhales/pages/about.dart';
 import 'package:savethewhales/pages/statistics.dart';
 import 'package:savethewhales/pages/map.dart';
 import 'package:savethewhales/pages/bill.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -87,17 +88,22 @@ class HomepageContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            height: 180,
-            margin: const EdgeInsets.all(18),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(7),
-              border: Border.all(
-                color: Colors.black,
-                width: 2,
-              ),
-            ),
+          CarouselSlider(
+            options: CarouselOptions(height: 200.0),
+            items: [1,2,3,4,5].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF3572EF)
+                    ),
+                    child: Center(child: Text('News $i', style: TextStyle(fontSize: 16.0),))
+                  );
+                },
+              );
+            }).toList(),
           ),
           searchField(),
           const SizedBox(
