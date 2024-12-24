@@ -207,14 +207,17 @@ class _BillPageState extends State<BillPage> {
               child: const Text('Donate Now !!'),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BillListPage()),
-              );
-            },
-            child: const Text('Show Bills'),
+          const SizedBox(height: 10,),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BillListPage()),
+                );
+              },
+              child: const Text('Show Bills'),
+            ),
           ),
         ],
       )

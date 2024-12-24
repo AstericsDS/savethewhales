@@ -39,6 +39,7 @@ class DatabaseService {
           $_nominalColumnName TEXT NOT NULL,
           $_paymentColumnName TEXT NOT NULL
         );
+        
         CREATE TABLE whale (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         whaletype TEXT NOT NULL,

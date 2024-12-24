@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:savethewhales/pages/about.dart';
+import 'package:savethewhales/pages/statistics.dart';
 import 'package:savethewhales/pages/map.dart';
 import 'package:savethewhales/pages/bill.dart';
 
@@ -116,7 +117,7 @@ class HomepageContent extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AboutWhales()),
+                MaterialPageRoute(builder: (context) => const StatPage()),
               );
             },
             child: Container(

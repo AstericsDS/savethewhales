@@ -13,13 +13,13 @@ class _AboutWhalesState extends State<AboutWhales> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About whales'),
-        body: main(),
       ),
+      body: main(),
 
     );
   }
 
   Widget main() {
-    
+    return Text('jomok');
   }
 }
