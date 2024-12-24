@@ -88,22 +88,25 @@ class HomepageContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CarouselSlider(
-            options: CarouselOptions(height: 200.0),
-            items: [1,2,3,4,5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF3572EF)
-                    ),
-                    child: Center(child: Text('News $i', style: TextStyle(fontSize: 16.0),))
-                  );
-                },
-              );
-            }).toList(),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: CarouselSlider(
+              options: CarouselOptions(height: 200.0),
+              items: [1, 2, 3, 4, 5].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(color: Color(0xFF3572EF)),
+                        child: Image.asset(
+                          'assets/svgs/fmts.png',
+                          fit: BoxFit.cover,
+                        ));
+                  },
+                );
+              }).toList(),
+            ),
           ),
           searchField(),
           const SizedBox(
