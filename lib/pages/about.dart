@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:savethewhales/pages/beluga.dart';
+import 'package:savethewhales/pages/bluewhale.dart';
+import 'package:savethewhales/pages/orca.dart';
+import 'package:savethewhales/pages/spermwhale.dart';
 
 class AboutWhales extends StatefulWidget {
   const AboutWhales({super.key});
@@ -22,12 +26,15 @@ class _AboutWhalesState extends State<AboutWhales> {
   Widget main() {
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          height: 200,
-          child: Image.asset(
-            'assets/svgs/about-whale.jpg',
-            fit: BoxFit.cover,
+        Padding(
+          padding: EdgeInsets.all(20),
+          child: SizedBox(
+            width: double.infinity,
+            height: 200,
+            child: Image.asset(
+              'assets/svgs/about-whale.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Padding(
@@ -49,7 +56,7 @@ class _AboutWhalesState extends State<AboutWhales> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AboutWhales()),
+                        builder: (context) => const Orca()),
                   );
                 },
                 child: Chip(
@@ -71,7 +78,7 @@ class _AboutWhalesState extends State<AboutWhales> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AboutWhales()),
+                        builder: (context) => const BlueWhale()),
                   );
                 },
                 child: Chip(
@@ -85,7 +92,7 @@ class _AboutWhalesState extends State<AboutWhales> {
                       ),
                     ),
                   ),
-                  label: Text('Blue Whale'),
+                  label: Text('Paus Biru'),
                 ),
               ),
               GestureDetector(
@@ -93,7 +100,7 @@ class _AboutWhalesState extends State<AboutWhales> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AboutWhales()),
+                        builder: (context) => const SpermWhale()),
                   );
                 },
                 child: Chip(
@@ -107,7 +114,7 @@ class _AboutWhalesState extends State<AboutWhales> {
                       ),
                     ),
                   ),
-                  label: Text('Sperm Whale'),
+                  label: Text('Paus Sperma'),
                 ),
               ),
               GestureDetector(
@@ -115,7 +122,7 @@ class _AboutWhalesState extends State<AboutWhales> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AboutWhales()),
+                        builder: (context) => const Beluga()),
                   );
                 },
                 child: Chip(
