@@ -26,7 +26,7 @@ class _StatPageState extends State<StatPage> {
             Center(
               child: Title(
                 color: Colors.black, 
-                child: Text(
+                child: const Text(
                   'Ambarawa', 
                   style: TextStyle(
                     fontSize: 24, 

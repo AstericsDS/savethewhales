@@ -57,7 +57,7 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       centerTitle: true,
-      backgroundColor: Colors.blue[300],
+      backgroundColor: Color(0xFF050C9C),
       actions: [
         Container(
           margin: const EdgeInsets.all(10),
