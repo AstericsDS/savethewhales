@@ -129,7 +129,7 @@ class _BillPageState extends State<BillPage> {
               ],
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Enter your nominal',
+                labelText: 'Enter amount',
               ),
               onSaved: ( newValue) {
                 nominal = newValue;
