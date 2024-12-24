@@ -12,7 +12,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
-  
+
   final List<Widget> _screens = [
     const HomepageContent(),
     const MapPage(),
@@ -31,14 +31,15 @@ class _HomepageState extends State<Homepage> {
       appBar: theAppBar(),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.map_rounded), label: 'Map'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.request_quote_rounded), label: 'Bill'),
-      ]),
+          currentIndex: _currentIndex,
+          onTap: _onTabTapped,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.map_rounded), label: 'Map'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.request_quote_rounded), label: 'Bill'),
+          ]),
     );
   }
 
@@ -148,13 +149,9 @@ class HomepageContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    'assets/svgs/whale-2.svg',
-                    width: 75,
-                    height: 75,
-                  ),
+                  Icon(Icons.info, size: 70,),
                   const Text(
-                    'Option 2',
+                    'Whales Info',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                     ),
@@ -166,60 +163,6 @@ class HomepageContent extends StatelessWidget {
         ),
         const SizedBox(
           height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              width: boxSize,
-              height: boxSize,
-              decoration: BoxDecoration(
-                color: Colors.indigo[300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/svgs/whale-3.svg',
-                    width: 75,
-                    height: 75,
-                  ),
-                  const Text(
-                    'Option 3',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: boxSize,
-              height: boxSize,
-              decoration: BoxDecoration(
-                color: Colors.indigo[300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/svgs/whale-4.svg',
-                    width: 75,
-                  ),
-                  const Text(
-                    'Option 4',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ],
     );
